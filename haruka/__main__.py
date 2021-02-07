@@ -22,7 +22,7 @@ from haruka.modules.connection import connected
 
 PM_START = """Hello {}, my name is {}
 💮iam nikki to control your group effectivly💮
- 🎀Add me to a group by clicking [🎀ADD ME🎀](http://t.me/tg_GroupManagerBot?startgroup=true).
+ 🎀Add me to a group by clicking [🎀ADD ME🎀](http://t.me/pgirl_bot?startgroup=true).
 """
 
 
@@ -140,10 +140,6 @@ def send_start(bot, update):
     first_name = update.effective_user.first_name 
     text = PM_START
 
-    keyboard = [[InlineKeyboardButton(text="🇮🇳 Language", callback_data="set_lang_")]]
-    keyboard += [[InlineKeyboardButton(text="🛠 Reporting", callback_data="cntrl_panel_M"), 
-        InlineKeyboardButton(text="❔ Help", callback_data="help_back")]]
-
     update.effective_message.reply_text(PM_START.format(escape_markdown(first_name), bot.first_name), reply_markup=InlineKeyboardMarkup(keyboard), disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN)
 
 
@@ -178,7 +174,7 @@ def control_panel(bot, update):
     if M_match:
         text = "*Control panel* 🛠"
 
-        keyboard = [[InlineKeyboardButton(text="👤 My settings", callback_data="cntrl_panel_U(1)")]]
+        keyboard = [[InlineKeyboardButton(text="🎀SETTINGS🎀", callback_data="cntrl_panel_U(1)")]]
 
         #Show connected chat and add chat settings button
         conn = connected(bot, update, chat, user.id, need_admin=False)
@@ -191,7 +187,7 @@ def control_panel(bot, update):
             member = chatG.get_member(user.id)
             if member.status in ('administrator', 'creator'):
                 text += f"\nConnected chat - *{chatG.title}* (you {member.status})"
-                keyboard += [[InlineKeyboardButton(text="👥 Group settings", callback_data="cntrl_panel_G_back")]]
+                keyboard += [[InlineKeyboardButton(text="🎀GROUP SETTINGS🎀", callback_data="cntrl_panel_G_back")]]
             elif user.id in SUDO_USERS:
                 text += f"\nConnected chat - *{chatG.title}* (you sudo)"
                 keyboard += [[InlineKeyboardButton(text="👥 Group settings (SUDO)", callback_data="cntrl_panel_G_back")]]
